@@ -1,13 +1,20 @@
 import React from "react";
+import { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import HelloWorld from "../components/HelloWorld";
 import "../styles/globals.css";
 
-function App() {
+function App({ Component }: AppProps) {
+  const [queryClient] = React.useState(() => new QueryClient());
+
   return (
-    <React.StrictMode>
-      <HelloWorld />
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <React.StrictMode>
+        <div className="max-w-7xl px-8 mt-24 mx-auto">
+          <Component />
+        </div>
+      </React.StrictMode>
+    </QueryClientProvider>
   );
 }
 
