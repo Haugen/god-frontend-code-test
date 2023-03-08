@@ -10,7 +10,7 @@ function App({ Component }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <React.StrictMode>
-        <div className="max-w-7xl px-8 mt-24 mx-auto">
+        <div className="max-w-7xl lg:px-8 mt-24 mx-auto">
           <Component />
         </div>
       </React.StrictMode>
