@@ -32,7 +32,7 @@ const FilterCta = ({ type, count, isCurrent, setFilter }: FilterCtaProps) => {
 
 const FilterModels = () => {
   const { filter, setFilter } = useContext(ModelsFilterContext);
-  const { data } = useQuery(["cars", ""], () => fetchCars(filter), {
+  const { data } = useQuery(["cars"], () => fetchCars(), {
     enabled: false,
   });
 

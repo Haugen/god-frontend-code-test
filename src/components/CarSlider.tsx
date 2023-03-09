@@ -14,10 +14,7 @@ import SliderNavButton from "./SliderNavButton";
 const CarSlider = () => {
   const [prevDisabled, setPrevDisabled] = useState(true);
   const [nextDisabled, setNextDisabled] = useState(false);
-  const { filter } = useContext(ModelsFilterContext);
-  const { data, isLoading } = useQuery(["cars", filter], () =>
-    fetchCars(filter)
-  );
+  const { cars, isLoadingCars, filter } = useContext(ModelsFilterContext);
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const isMediumDevice = useMediaQuery("only screen and (min-width : 480px)");
   const isLargeDevice = useMediaQuery("only screen and (min-width : 1024px)");
@@ -27,7 +24,7 @@ const CarSlider = () => {
   swiperRef?.on("slideChange", (swiper) => {
     if (swiper.activeIndex === 0) {
       setPrevDisabled(true);
-    } else if (swiper.activeIndex === (data?.length || 0) - 4) {
+    } else if (swiper.activeIndex === cars.length - 4) {
       setNextDisabled(true);
     } else if (prevDisabled || nextDisabled) {
       setPrevDisabled(false);
@@ -35,7 +32,7 @@ const CarSlider = () => {
     }
   });
 
-  if (isLoading) return null;
+  if (isLoadingCars) return null;
 
   return (
     <>
@@ -49,7 +46,7 @@ const CarSlider = () => {
         pagination={!showNav}
         modules={[Pagination]}
       >
-        {data?.map((car) => (
+        {cars.map((car) => (
           <SwiperSlide key={car.id} className="px-2">
             <CarSliderItem car={car} />
           </SwiperSlide>

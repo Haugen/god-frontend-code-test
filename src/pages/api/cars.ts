@@ -9,17 +9,9 @@ export default async function handler(
   res: NextApiResponse<Car[]>
 ) {
   try {
-    const { filter } = req.query;
     const apiDir = path.join(process.cwd(), "public/api");
     const fileContentStr = await fs.readFile(apiDir + "/cars.json", "utf8");
     let fileContent = JSON.parse(fileContentStr) as Car[];
-
-    if (filter) {
-      fileContent = fileContent.filter(
-        (item) => item.bodyType === (filter as BodyTypeOrEmpty)
-      );
-    }
-
     res.status(200).json(fileContent);
   } catch (error) {
     res.status(500);
