@@ -24,6 +24,8 @@ const CarSlider = () => {
   const showNav = isLargeDevice && (swiperRef?.slides?.length || 0) > 4;
   const slidesPerView = isLargeDevice ? 4 : isMediumDevice ? 2.5 : 1.3;
 
+  console.log(prevDisabled);
+
   swiperRef?.on("slideChange", (swiper) => {
     if (swiper.activeIndex === 0) {
       setPrevDisabled(true);
