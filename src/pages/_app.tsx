@@ -12,7 +12,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <React.StrictMode>
-        <div className="max-w-7xl mt-24 mx-auto">
+        <div className="max-w-7xl lg:px-4 mt-24 mx-auto">
           <section>
             <ModelsFilterProvider>
               <h1 className="text-center text-3xl mb-12">Våra modeller</h1>

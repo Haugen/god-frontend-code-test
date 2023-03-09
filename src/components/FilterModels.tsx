@@ -17,7 +17,9 @@ type FilterCtaProps = {
 const FilterCta = ({ type, count, isCurrent, setFilter }: FilterCtaProps) => {
   return (
     <button
-      className={clsx({ "border-b-2 border-blue-500": isCurrent })}
+      className={clsx("text-gray-500 hover:text-gray-900", {
+        "border-b-2 text-gray-900 border-primary": isCurrent,
+      })}
       onClick={() => setFilter(type)}
     >
       {type || "alla"} ({count})
@@ -32,7 +34,7 @@ const FilterModels = () => {
   });
 
   return (
-    <ul className="flex space-x-4 text-lg text-gray-600 hover:text-gray-900 justify-center mb-12">
+    <ul className="flex space-x-4 text-base sm:text-lg text-gray-600 hover:text-gray-900 justify-center mb-12">
       <li>
         <FilterCta
           isCurrent={filter == ""}
