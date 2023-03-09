@@ -15,7 +15,7 @@ function App() {
         <div className="max-w-7xl lg:px-4 mt-24 mx-auto">
           <section>
             <ModelsFilterProvider>
-              <h1 className="text-center text-3xl mb-12">Våra modeller</h1>
+              <h1 className="text-center text-3xl mb-12">Our models</h1>
               <FilterModels />
               <CarSlider />
             </ModelsFilterProvider>
