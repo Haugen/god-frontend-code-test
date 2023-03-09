@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useMediaQuery } from "@react-hookz/web";
 import SwiperClass, { Pagination } from "swiper";
-
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -23,7 +22,6 @@ const CarSlider = () => {
   const isMediumDevice = useMediaQuery("only screen and (min-width : 480px)");
   const isLargeDevice = useMediaQuery("only screen and (min-width : 1024px)");
   const showNav = isLargeDevice && (swiperRef?.slides?.length || 0) > 4;
-
   const slidesPerView = isLargeDevice ? 4 : isMediumDevice ? 2.5 : 1.3;
 
   swiperRef?.on("slideChange", (swiper) => {
@@ -43,11 +41,12 @@ const CarSlider = () => {
     <>
       <Swiper
         onSwiper={setSwiperRef}
+        className="pb-12"
         slidesPerView={slidesPerView}
         spaceBetween={0}
         speed={500}
         navigation={true}
-        pagination={false}
+        pagination={!showNav}
         modules={[Pagination]}
       >
         {data?.map((car) => (
@@ -58,7 +57,7 @@ const CarSlider = () => {
       </Swiper>
 
       {showNav && (
-        <div className="flex justify-end w-full max-lg:hidden mt-8 pr-2">
+        <div className="flex justify-end w-full max-lg:hidden pr-2">
           <SliderNavButton
             disabled={prevDisabled}
             onClick={() => swiperRef?.slidePrev()}
