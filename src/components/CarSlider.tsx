@@ -13,6 +13,8 @@ import { ModelsFilterContext } from "../context/ModelFilterContext";
 import SliderNavButton from "./SliderNavButton";
 
 const CarSlider = () => {
+  const [prevDisabled, setPrevDisabled] = useState(true);
+  const [nextDisabled, setNextDisabled] = useState(false);
   const { filter } = useContext(ModelsFilterContext);
   const { data, isLoading } = useQuery(["cars", filter], () =>
     fetchCars(filter)
@@ -23,6 +25,17 @@ const CarSlider = () => {
   const showNav = isLargeDevice && (swiperRef?.slides?.length || 0) > 4;
 
   const slidesPerView = isLargeDevice ? 4 : isMediumDevice ? 2.5 : 1.3;
+
+  swiperRef?.on("slideChange", (swiper) => {
+    if (swiper.activeIndex === 0) {
+      setPrevDisabled(true);
+    } else if (swiper.activeIndex === (data?.length || 0) - 4) {
+      setNextDisabled(true);
+    } else if (prevDisabled || nextDisabled) {
+      setPrevDisabled(false);
+      setNextDisabled(false);
+    }
+  });
 
   if (isLoading) return null;
 
@@ -47,11 +60,15 @@ const CarSlider = () => {
       {showNav && (
         <div className="flex justify-end w-full max-lg:hidden mt-8 pr-2">
           <SliderNavButton
+            disabled={prevDisabled}
             onClick={() => swiperRef?.slidePrev()}
             leftNav={true}
           />
           <div className="w-4" />
-          <SliderNavButton onClick={() => swiperRef?.slideNext()} />
+          <SliderNavButton
+            disabled={nextDisabled}
+            onClick={() => swiperRef?.slideNext()}
+          />
         </div>
       )}
     </>

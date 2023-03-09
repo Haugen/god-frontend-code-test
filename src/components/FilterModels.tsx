@@ -15,14 +15,17 @@ type FilterCtaProps = {
 };
 
 const FilterCta = ({ type, count, isCurrent, setFilter }: FilterCtaProps) => {
+  const filterText = type || "all";
+
   return (
     <button
+      aria-label={`filter on ${filterText}`}
       className={clsx("text-gray-500 hover:text-gray-900", {
         "border-b-2 text-gray-900 border-primary": isCurrent,
       })}
       onClick={() => setFilter(type)}
     >
-      {type || "alla"} ({count})
+      {filterText} ({count})
     </button>
   );
 };

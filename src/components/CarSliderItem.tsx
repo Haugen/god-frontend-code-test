@@ -7,7 +7,11 @@ import LinkCta from "./LinkCta";
 const CarSliderItem = ({ car }: { car: Car }) => {
   return (
     <div>
-      <Link href={`/learn/${car.id}`} className="lg:text-sm group">
+      <Link
+        tabIndex={-1}
+        href={`/learn/${car.id}`}
+        className="lg:text-sm group"
+      >
         <div className="uppercase text-gray-400 group-hover:text-primary font-semibold text-sm">
           {car.bodyType}
         </div>
@@ -28,8 +32,15 @@ const CarSliderItem = ({ car }: { car: Car }) => {
         </div>
       </Link>
       <div className="flex space-x-6 justify-center mt-4">
-        <LinkCta href={`/learn/${car.id}`}>learn</LinkCta>
-        <LinkCta href={`/shop/${car.id}`}>shop</LinkCta>
+        <LinkCta
+          ariaLabel={`learn more about ${car.id}`}
+          href={`/learn/${car.id}`}
+        >
+          learn
+        </LinkCta>
+        <LinkCta ariaLabel={`shop ${car.id}`} href={`/shop/${car.id}`}>
+          shop
+        </LinkCta>
       </div>
     </div>
   );
