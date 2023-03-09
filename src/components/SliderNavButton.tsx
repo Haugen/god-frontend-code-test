@@ -1,6 +1,5 @@
-import clsx from "clsx";
-
 import ChevronSmall from "../icons/ChevronSmall";
+import { cn } from "../utils/helpers";
 
 type Props = {
   leftNav?: boolean;
@@ -11,7 +10,7 @@ type Props = {
 const SliderNavButton = ({ leftNav = false, disabled, onClick }: Props) => {
   return (
     <button
-      className={clsx(
+      className={cn(
         "border border-gray-900 flex items-center justify-center rounded-full w-10 h-10 p-3",
         { "border-gray-400": disabled }
       )}
@@ -20,7 +19,7 @@ const SliderNavButton = ({ leftNav = false, disabled, onClick }: Props) => {
       aria-label={leftNav ? "Previous car" : "Next car"}
     >
       <ChevronSmall
-        className={clsx(
+        className={cn(
           "pl-1",
           { "rotate-180": leftNav },
           { "stroke-gray-400": disabled }

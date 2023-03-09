@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "../utils/helpers";
 
 const ChevronSmall = ({
   width = 20,
@@ -13,7 +13,7 @@ const ChevronSmall = ({
 }) => {
   return (
     <svg
-      className={clsx(stroke, className)}
+      className={cn(stroke, className)}
       width={width}
       height={height}
       viewBox="1.239 0.739 5.527 9.524"

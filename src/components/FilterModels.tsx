@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext, Dispatch, SetStateAction } from "react";
-import clsx from "clsx";
 
 import { BodyTypeOrEmpty } from "../utils/types";
 import { ModelsFilterContext } from "../context/ModelFilterContext";
 import { fetchCars } from "../utils/api-fetchers";
 import { bodyTypes } from "../utils/types";
+import { cn } from "../utils/helpers";
 
 type FilterCtaProps = {
   type: BodyTypeOrEmpty;
@@ -20,7 +20,7 @@ const FilterCta = ({ type, count, isCurrent, setFilter }: FilterCtaProps) => {
   return (
     <button
       aria-label={`filter on ${filterText}`}
-      className={clsx("text-gray-500 hover:text-gray-900", {
+      className={cn("text-gray-500 hover:text-gray-900", {
         "border-b-2 text-gray-900 border-primary": isCurrent,
       })}
       onClick={() => setFilter(type)}
