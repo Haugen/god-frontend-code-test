@@ -1,18 +1,22 @@
-import { useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useMediaQuery } from "@react-hookz/web";
-import { Pagination } from "swiper";
+import SwiperClass, { Pagination } from "swiper";
 
 import "swiper/css";
 import "swiper/css/pagination";
 
 import { fetchCars } from "../utils/api-fetchers";
 import Car from "./Car";
+import { ModelsFilterContext } from "../context/ModelFilterContext";
 
 const CarSlider = () => {
-  const { data, isLoading } = useQuery(["cars"], () => fetchCars());
-  const [swiperRef, setSwiperRef] = useState<Swiper>(null);
+  const { filter } = useContext(ModelsFilterContext);
+  const { data, isLoading } = useQuery(["cars", filter], () =>
+    fetchCars(filter)
+  );
+  const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const isMediumDevice = useMediaQuery("only screen and (min-width : 480px)");
   const isLargeDevice = useMediaQuery("only screen and (min-width : 1024px)");
 
@@ -25,20 +29,20 @@ const CarSlider = () => {
       <Swiper
         onSwiper={setSwiperRef}
         slidesPerView={slidesPerView}
-        spaceBetween={20}
+        spaceBetween={0}
         speed={500}
         navigation={true}
         pagination={true}
         modules={[Pagination]}
       >
         {data?.map((car) => (
-          <SwiperSlide key={car.id} className="first:ml-4">
+          <SwiperSlide key={car.id} className="first:ml-2 last:mr-4 px-2">
             <Car car={car} />
           </SwiperSlide>
         ))}
       </Swiper>
-      <button onClick={() => swiperRef.slidePrev()}>prev</button>
-      <button onClick={() => swiperRef.slideNext()}>next</button>
+      <button onClick={() => swiperRef?.slidePrev()}>prev</button>
+      <button onClick={() => swiperRef?.slideNext()}>next</button>
     </>
   );
 };

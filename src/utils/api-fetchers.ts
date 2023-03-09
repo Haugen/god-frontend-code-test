@@ -1,10 +1,10 @@
 import axios from "axios";
 
-import { Car } from "./types";
+import { BodyTypeOrEmpty, Car } from "./types";
 
-export const fetchCars = async (filter?: string): Promise<Car[]> => {
+export const fetchCars = async (filter?: BodyTypeOrEmpty): Promise<Car[]> => {
   try {
-    const { data } = await axios.get("/api/cars");
+    let { data } = await axios.get(`/api/cars?filter=${filter}`);
     return data;
   } catch (error) {
     console.log(error);
