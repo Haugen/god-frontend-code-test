@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { Car } from "../utils/types";
 
-const Car = ({ car }: { car: Car }) => {
+const CarSliderItem = ({ car }: { car: Car }) => {
   return (
     <div>
       <div className="lg:text-sm group">
@@ -25,8 +25,12 @@ const Car = ({ car }: { car: Car }) => {
           />
         </div>
       </div>
+      <div>
+        <p>learn</p>
+        <p>shop</p>
+      </div>
     </div>
   );
 };
 
-export default Car;
+export default CarSliderItem;
