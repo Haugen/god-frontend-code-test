@@ -41,7 +41,7 @@ const FilterModels = () => {
       <li>
         <FilterCta
           isCurrent={filter == ""}
-          count={data?.length}
+          count={data?.length || 0}
           setFilter={setFilter}
           type=""
         />
